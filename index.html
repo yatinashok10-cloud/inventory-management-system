@@ -1,0 +1,85 @@
+\<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'">
+<title>Stockroom - Simple Inventory Tracker for Small Shops</title>
+<meta name="description" content="Stockroom is a free inventory tracker for small shops, school clubs and home businesses. Add items, update counts and see what is running low.">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stockroom - Simple Inventory Tracker">
+<meta property="og:description" content="Keep track of what is on your shelves. Free, no signup.">
+<meta property="og:image" content="https://example.com/preview.png">
+<meta property="og:image:alt" content="Stockroom inventory tracker">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="index.html">Stockroom</a>
+  <nav><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
+</header>
+
+<main>
+  <section class="intro">
+    <h1>Keep track of what is on your shelves</h1>
+    <p>Stockroom is for small shops, school clubs, garages and anybody with too many boxes. Add your stuff, change the numbers when things sell, and see what is running low. Everything is saved in this browser only.</p>
+    <a class="btn" id="cta" href="#add">Add your first item</a>
+  </section>
+
+  <dl class="stats">
+    <div><dt>Items</dt><dd id="sItems">-</dd></div>
+    <div><dt>Units in stock</dt><dd id="sUnits">-</dd></div>
+    <div><dt>Stock value</dt><dd id="sValue">-</dd></div>
+    <div><dt>Running low</dt><dd id="sLow">-</dd></div>
+  </dl>
+
+  <section class="box" id="add">
+    <h2 id="formTitle">Add an item</h2>
+    <form id="itemForm" novalidate autocomplete="off">
+      <input type="hidden" id="itemId" value="">
+      <label>Name <input id="name" maxlength="60" required></label>
+      <label>SKU (optional) <input id="sku" maxlength="20" placeholder="PEN-01"></label>
+      <label>Category (optional) <input id="cat" maxlength="30"></label>
+      <label>Quantity <input id="qty" type="number" inputmode="numeric" min="0" max="1000000" step="1" required></label>
+      <label>Price each <input id="price" type="number" inputmode="decimal" min="0" max="10000000" step="0.01" required></label>
+      <label>Warn me at <input id="min" type="number" inputmode="numeric" min="0" max="1000000" step="1" value="5" required></label>
+      <div class="trap" aria-hidden="true"><label>Leave this empty <input id="website" tabindex="-1" autocomplete="off"></label></div>
+      <p id="formMsg" role="alert"></p>
+      <div><button type="submit" id="saveBtn">Add item</button><button type="button" id="cancelBtn" hidden>Cancel edit</button></div>
+    </form>
+  </section>
+
+  <section class="box" id="list">
+    <h2>Your items</h2>
+    <div class="tools">
+      <label>Search <input id="search" type="search" maxlength="60"></label>
+      <label class="check"><input type="checkbox" id="lowOnly"> Only show low stock</label>
+    </div>
+    <div class="wrap">
+      <table>
+        <caption class="gone">Inventory items</caption>
+        <thead><tr><th scope="col">Name</th><th scope="col">SKU</th><th scope="col">Category</th><th scope="col">Qty</th><th scope="col">Price</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p id="empty" hidden>Nothing to show yet. Use the form above to add your first item.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Stockroom keeps your items in your own browser. <a href="privacy.html">Privacy policy</a> <a href="terms.html">Terms of use</a></p>
+</footer>
+
+<div id="cookie" class="cookie" hidden role="dialog" aria-label="Cookie notice">
+  <p>This site saves your items in your browser so they are still here when you come back. Analytics only turns on if you say yes. <a href="privacy.html">Read the privacy policy</a></p>
+  <button type="button" id="yes">Allow analytics</button><button type="button" id="no">No thanks</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
